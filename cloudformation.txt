@@ -1,0 +1,39 @@
+{
+"parameters":
+{
+ "IType":
+  {
+   "Type":"string",
+  "Description":"Type of Instance"
+ }
+},
+ "Resources":{
+  "myec2":{
+    "Type":"AWS::EC2::Instance"
+    "properties":{
+     "InstanceType":{"Ref":"IType"},
+     "ImageId":"ami-05a36d3b9aa4a17ac",
+     "KeyName":"jenkinsawskey",
+     "securityGroupIds":[{sg-011751717d7259d53
+      "Ref":"MySG"
+     }]
+    }
+    },
+    "MySG":{
+    "Type":"AWS::EC2::SecurityGroup",
+    "Properties":{
+     "GroupDescription":"vpc1"
+     "VpcId":"vpc-02c236a7cad7b6d60"
+    }
+   },
+   "Myvol":{
+    "Type":"AWS::EC2::Volume",
+    "Properties":{"
+     "Size":"10",
+     "VolumesType":"gp2",
+     "AvailabilityZone":{
+      "Fn::GetAtt":["myec2",
+"AailabilityZone"]
+   }
+  }
+ },
